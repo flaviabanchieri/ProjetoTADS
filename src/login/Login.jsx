@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
+import logoBarber from "../assets/barber-logo-2.png";
+import './LoginPage.css'
 
 import { history } from '_helpers';
 import { authActions } from '_store';
@@ -37,35 +39,51 @@ function Login() {
     }
 
     return (
-        <div className="col-md-6 offset-md-3 mt-5">
-            <div className="alert alert-info">
-                Username: test<br />
-                Password: test
-            </div>
-            <div className="card">
-                <h4 className="card-header">Login</h4>
-                <div className="card-body">
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="form-group">
-                            <label>Username</label>
-                            <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
-                            <div className="invalid-feedback">{errors.username?.message}</div>
-                        </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                            <div className="invalid-feedback">{errors.password?.message}</div>
-                        </div>
-                        <button disabled={isSubmitting} className="btn btn-primary">
-                            {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                            Login
-                        </button>
-                        {authError &&
-                            <div className="alert alert-danger mt-3 mb-0">{authError.message}</div>
-                        }
-                    </form>
+        <div className="container">
+        <div className="container-login">
+         
+            <div className="wrap-login">
+              <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+                <span className="login-form-title">Bem Vindo!</span>
+  
+                <span className="login-form-title">
+                  <img src={logoBarber} alt="Logo Barbearia" />
+                </span>
+  
+                <div className="wrap-input">
+  
+                  <label className="labelLogin"> E-mail: </label>
+                  <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+                              <div className="invalid-feedback">{errors.username?.message}</div>
+  
+                  <label className="labelLogin">
+                    Password:
+                  </label>
+                  <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+                              <div className="invalid-feedback">{errors.password?.message}</div>
+  
                 </div>
+  
+                <div className="container-login-form-btn">
+                <button disabled={isSubmitting} className="login-form-btn">
+                              {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                              Login
+                          </button>
+                          {authError &&
+                              <div className="alert alert-danger mt-3 mb-0">{authError.message}</div>
+                          }
+                </div>
+  
+                <div className="text-center">
+                  <span className="txt1">Esqueci a senha</span>
+                  <a href="#" className="txt2">
+                    Recuperar Senha
+                  </a>
+                </div>
+              </form>
             </div>
+    
         </div>
-    )
-}
+      </div>
+    );
+  }
